@@ -7,7 +7,7 @@ Welcome to Public Good supportUs, where everyone and anyone is able to have thei
 
 ## 📹 Project Demo
 
-https://youtu.be/ooxQNzTd3fs.mp4
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ooxQNzTd3fs/1.jpg)](https://www.youtube.com/watch?v=ooxQNzTd3fs)
 
 ## ✅ Getting Started
 ### For Campaigners:
