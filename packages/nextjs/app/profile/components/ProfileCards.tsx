@@ -1,5 +1,4 @@
 import React, { MouseEventHandler } from "react";
-import Image from "next/image";
 import { formatEther } from "viem";
 import { CampaignProgressBar } from "~~/components/scaffold-eth";
 import CampaignButton from "~~/components/scaffold-eth/CampaignButton";
@@ -51,11 +50,10 @@ const ProfileCard: React.FC<ProfileCardsProps> = ({ campaign }) => {
       style={{ boxShadow: "0 10px 20px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2)" }}
     >
       <h1 className="text-center justify-center font-serif font-bold text-slate-300 truncate">{campaign.title}</h1>
-      <Image
+      <img
         src={campaign.image}
         alt={campaign.title}
         className="w-full h-[158px] object-cover rounded-[15px]"
-        layout="fill"
       />
 
       <div className="flex flex-col">
@@ -77,7 +75,7 @@ const ProfileCard: React.FC<ProfileCardsProps> = ({ campaign }) => {
 
         <div className="flex items-center mb-[10px] gap-[10px]">
           <div className="w-[30px] h-[30px] flex justify-center items-center">
-            <Image src="/favicon.png" alt="buidlguidl" className="bg-white rounded-[10px]" layout="fill" />
+            <img src="/favicon.png" alt="buidlguidl" className="bg-white rounded-[10px]" />
           </div>
           <p className="font-normal truncate">
             <span className="text-slate-500">{campaign.owner}</span>

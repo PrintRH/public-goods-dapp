@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Crowdfunding.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity >0.8.20;\n\n/**\n * Smart contract to allow crowdfunding for buidlguidl batch1 project!\n * @author rhbdl\n */\ncontract Crowdfunding {\n\t// State Variables\n\tstruct Campaign {\n\t\taddress payable owner;\n\t\tstring title;\n\t\tstring description;\n\t\tuint256 id;\n\t\tuint256 goal;\n\t\tuint256 deadline;\n\t\tuint256 raised;\n\t\tstring image; // might need to change this to take IPFS hash\n\t\taddress[] contributors;\n\t\tuint256[] contributions;\n\t\tbool isArchived;\n\t}\n\n\tmapping(uint256 => Campaign) public campaigns;\n\n\tuint256 public campaignCount = 0;\n\n\tmodifier onlyOwner(uint256 _id) {\n\t\trequire(\n\t\t\tmsg.sender == campaigns[_id].owner,\n\t\t\t\"Only owner can call this function\"\n\t\t);\n\t\t_;\n\t}\n\n\t// function to create a new campaign and return the campaign ID\n\tfunction createCampaign(\n\t\taddress _owner,\n\t\tstring memory _title,\n\t\tstring memory _description,\n\t\tuint256 _goal,\n\t\tuint256 _deadline,\n\t\tstring memory _image\n\t) public returns (uint256) {\n\t\tCampaign storage campaign = campaigns[campaignCount];\n\t\trequire(_deadline > block.timestamp, \"Deadline must be in future\");\n\n\t\t_owner = msg.sender;\n\t\tcampaign.owner = payable(_owner);\n\t\tcampaign.title = _title;\n\t\tcampaign.description = _description;\n\t\tcampaign.goal = _goal;\n\t\tcampaign.deadline = _deadline;\n\t\tcampaign.raised = 0;\n\t\tcampaign.image = _image;\n\t\tcampaign.isArchived = false;\n\n\t\tcampaign.id = campaignCount;\n\t\tcampaignCount++;\n\t\treturn campaignCount;\n\t}\n\n\t// function to contribute to a campaign\n\tfunction contributeToCampaign(uint256 _id) public payable {\n\t\tCampaign storage campaign = campaigns[_id];\n\t\trequire(msg.value > 0, \"Must contribute a positive amount\");\n\t\trequire(campaign.deadline > block.timestamp, \"Campaign has ended\");\n\t\trequire(!campaign.isArchived, \"Campaign is archived\");\n\n\t\tcampaign.raised += msg.value;\n\t\tcampaign.contributors.push(msg.sender);\n\t\tcampaign.contributions.push(msg.value);\n\t}\n\n\t// function to get campaign contributors details\n\tfunction getContributors(\n\t\tuint256 _id\n\t) public view returns (address[] memory, uint256[] memory) {\n\t\treturn (campaigns[_id].contributors, campaigns[_id].contributions);\n\t}\n\n\t// function to get all campaigns\n\tfunction getCampaigns() public view returns (Campaign[] memory) {\n\t\tCampaign[] memory allCampaigns = new Campaign[](campaignCount);\n\n\t\tfor (uint i = 0; i < campaignCount; i++) {\n\t\t\tallCampaigns[i] = campaigns[i];\n\t\t}\n\n\t\treturn allCampaigns;\n\t}\n\n\tfunction withdrawFunds(uint256 _id) public payable onlyOwner(_id) {\n\t\tCampaign storage campaign = campaigns[_id];\n\t\trequire(\n\t\t\tcampaign.raised >= campaign.goal,\n\t\t\t\"Campaign has not reached goal\"\n\t\t);\n\t\t(bool success, ) = msg.sender.call{ value: campaign.raised }(\"\");\n\t\trequire(success, \"Transfer failed.\");\n\t\tcampaign.isArchived = true;\n\t}\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

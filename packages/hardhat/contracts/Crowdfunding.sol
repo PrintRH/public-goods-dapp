@@ -99,6 +99,5 @@ contract Crowdfunding {
 		(bool success, ) = msg.sender.call{ value: campaign.raised }("");
 		require(success, "Transfer failed.");
 		campaign.isArchived = true;
-		console.log("Funds withdrawn successfully!");
 	}
 }
