@@ -67,4 +67,4 @@ yarn start
 This project was made possible through Scaffold ETH stack. Be sure to also show Scaffold ETH some ❤️
 
 
-✅ Verified contract: [0x47480483542D52294DC504959bb7D555CBe2C10b](https://sepolia.etherscan.io/address/0x47480483542D52294DC504959bb7D555CBe2C10b)https://sepolia.etherscan.io/address/0x47480483542D52294DC504959bb7D555CBe2C10b
+✅ Verified contract: [0x47480483542D52294DC504959bb7D555CBe2C10b](https://sepolia.etherscan.io/address/0x47480483542D52294DC504959bb7D555CBe2C10b)
