@@ -5,6 +5,9 @@ Welcome to Public Good supportUs, where everyone and anyone is able to have thei
 
 *As a huge supporter of public goods funding and decentralization ethos, I am dedicating my first BuidlGuidl project to contribute to this specific area! In case you are wondering - yes, supportUs is a wordplay on supporters* 
 
+## 📹 Project Demo
+
+https://youtu.be/ooxQNzTd3fs
 
 ## ✅ Getting Started
 ### For Campaigners:
