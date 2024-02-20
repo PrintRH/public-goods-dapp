@@ -55,7 +55,7 @@ yarn chain
 yarn deploy
 ```
 
-4. On a third terminal, start your app:
+4. On a third terminal, start your app and get building:
 
 ```
 yarn start
